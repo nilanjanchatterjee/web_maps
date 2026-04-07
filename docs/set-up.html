@@ -1,237 +1,161 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html>
 <head>
+  <meta charset="utf-8">
+  <title>Explore Data</title>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Set Up | Building Web Maps with Leaflet</title>
-  <meta name="description" content="2 Set Up | Building Web Maps with Leaflet" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
-  <meta property="og:title" content="2 Set Up | Building Web Maps with Leaflet" />
-  <meta property="og:type" content="book" />
-  
-  
-  <meta name="github-repo" content="ucdavisdatalab/workshop_web_maps" />
+  <!-- Marker Cluster -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css"/>
 
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Set Up | Building Web Maps with Leaflet" />
-  
-  
-  
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<meta name="author" content="Dr. Michele Tobias" />
-<meta name="author" content="Arthur Koehl" />
-<meta name="author" content="Naomi Kalman" />
-
-
-<meta name="date" content="2023-04-28" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="introduction.html"/>
-<link rel="next" href="build-a-webpage.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
-
-
+  <style>
+    #map { height: 75vh; }
+    .filter-box { margin-bottom: 10px; }
+  </style>
 </head>
 
 <body>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="https://datalab.ucdavis.edu/">
-  <img src="https://datalab.ucdavis.edu/wp-content/uploads/2019/07/datalab-logo-full-color-rgb-1.png" style="height: 100%; width: 100%; object-fit: contain" />
-</a></li>
-<li><a href="./" style="font-size: 18px">Building Web Maps with Leaflet</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a>
-<ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#description"><i class="fa fa-check"></i><b>0.1</b> Description</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>0.2</b> Learning Objectives</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#skills"><i class="fa fa-check"></i><b>0.3</b> Skills</a></li>
-<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>0.4</b> Prerequisites</a></li>
-<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#software-tools"><i class="fa fa-check"></i><b>0.5</b> Software &amp; Tools</a></li>
-</ul></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#what-is-a-web-map"><i class="fa fa-check"></i><b>1.1</b> What is a “Web Map”?</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#why-make-a-web-map"><i class="fa fa-check"></i><b>1.2</b> Why make a web map?</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#examples"><i class="fa fa-check"></i><b>1.3</b> Examples</a></li>
-<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#workflow"><i class="fa fa-check"></i><b>1.4</b> Workflow</a></li>
-<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#leaflet"><i class="fa fa-check"></i><b>1.5</b> Leaflet</a>
-<ul>
-<li class="chapter" data-level="1.5.1" data-path="introduction.html"><a href="introduction.html#other-web-map-tools"><i class="fa fa-check"></i><b>1.5.1</b> Other Web Map Tools</a></li>
-</ul></li>
-<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#workshop-data-uc-davis-campus-food"><i class="fa fa-check"></i><b>1.6</b> Workshop Data: UC Davis Campus Food</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="set-up.html"><a href="set-up.html"><i class="fa fa-check"></i><b>2</b> Set Up</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="set-up.html"><a href="set-up.html#download-the-data"><i class="fa fa-check"></i><b>2.1</b> Download the Data</a></li>
-<li class="chapter" data-level="2.2" data-path="set-up.html"><a href="set-up.html#folders"><i class="fa fa-check"></i><b>2.2</b> Folders</a></li>
-<li class="chapter" data-level="2.3" data-path="set-up.html"><a href="set-up.html#files"><i class="fa fa-check"></i><b>2.3</b> Files</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="build-a-webpage.html"><a href="build-a-webpage.html"><i class="fa fa-check"></i><b>3</b> Build a Webpage</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="build-a-webpage.html"><a href="build-a-webpage.html#intro-to-html"><i class="fa fa-check"></i><b>3.1</b> Intro to HTML</a></li>
-<li class="chapter" data-level="3.2" data-path="build-a-webpage.html"><a href="build-a-webpage.html#start-building-your-webpage"><i class="fa fa-check"></i><b>3.2</b> Start Building your Webpage</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="prepare-your-page-for-a-leaflet-web-map.html"><a href="prepare-your-page-for-a-leaflet-web-map.html"><i class="fa fa-check"></i><b>4</b> Prepare Your Page for a Leaflet Web Map</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="prepare-your-page-for-a-leaflet-web-map.html"><a href="prepare-your-page-for-a-leaflet-web-map.html#load-the-external-files"><i class="fa fa-check"></i><b>4.1</b> Load The External Files</a></li>
-<li class="chapter" data-level="4.2" data-path="prepare-your-page-for-a-leaflet-web-map.html"><a href="prepare-your-page-for-a-leaflet-web-map.html#add-a-map-div"><i class="fa fa-check"></i><b>4.2</b> Add a Map Div</a></li>
-<li class="chapter" data-level="4.3" data-path="prepare-your-page-for-a-leaflet-web-map.html"><a href="prepare-your-page-for-a-leaflet-web-map.html#add-a-script-section"><i class="fa fa-check"></i><b>4.3</b> Add a Script Section</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="add-a-map.html"><a href="add-a-map.html"><i class="fa fa-check"></i><b>5</b> Add a Map</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="add-a-map.html"><a href="add-a-map.html#add-a-map-1"><i class="fa fa-check"></i><b>5.1</b> Add A Map</a></li>
-<li class="chapter" data-level="5.2" data-path="add-a-map.html"><a href="add-a-map.html#add-a-marker"><i class="fa fa-check"></i><b>5.2</b> Add a Marker</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="use-external-data.html"><a href="use-external-data.html"><i class="fa fa-check"></i><b>6</b> Use External Data</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="use-external-data.html"><a href="use-external-data.html#about-geojson"><i class="fa fa-check"></i><b>6.1</b> About GeoJSON</a></li>
-<li class="chapter" data-level="6.2" data-path="use-external-data.html"><a href="use-external-data.html#formatting-the-data"><i class="fa fa-check"></i><b>6.2</b> Formatting the Data</a></li>
-<li class="chapter" data-level="6.3" data-path="use-external-data.html"><a href="use-external-data.html#read-the-data"><i class="fa fa-check"></i><b>6.3</b> Read the Data</a></li>
-<li class="chapter" data-level="6.4" data-path="use-external-data.html"><a href="use-external-data.html#add-data-to-the-map"><i class="fa fa-check"></i><b>6.4</b> Add Data to the Map</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="add-a-popup.html"><a href="add-a-popup.html"><i class="fa fa-check"></i><b>7</b> Add a popup</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="add-a-popup.html"><a href="add-a-popup.html#add-a-popup-1"><i class="fa fa-check"></i><b>7.1</b> Add a popup</a></li>
-<li class="chapter" data-level="7.2" data-path="add-a-popup.html"><a href="add-a-popup.html#customize-popup-text-with-data"><i class="fa fa-check"></i><b>7.2</b> Customize Popup Text with Data</a></li>
-<li class="chapter" data-level="7.3" data-path="add-a-popup.html"><a href="add-a-popup.html#add-details-to-the-popup-text"><i class="fa fa-check"></i><b>7.3</b> Add details to the popup text</a></li>
-<li class="chapter" data-level="7.4" data-path="add-a-popup.html"><a href="add-a-popup.html#add-a-description-to-the-popup"><i class="fa fa-check"></i><b>7.4</b> Add a description to the popup</a></li>
-<li class="chapter" data-level="7.5" data-path="add-a-popup.html"><a href="add-a-popup.html#add-an-image-to-the-popup"><i class="fa fa-check"></i><b>7.5</b> Add an image to the popup</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="put-your-web-page-online.html"><a href="put-your-web-page-online.html"><i class="fa fa-check"></i><b>8</b> Put Your Web Page online</a></li>
-<li class="chapter" data-level="9" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>9</b> Resources</a></li>
-</ul>
-
-      </nav>
-    </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Building Web Maps with Leaflet</a>
-          </h1>
-        </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="set-up" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">2</span> Set Up<a href="set-up.html#set-up" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Before we do any coding, let’s set up our file and folder structure.</p>
-<div id="download-the-data" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Download the Data<a href="set-up.html#download-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The data for the workshop is available to download from this <a href="https://ucdavis.box.com/s/3v3k43vz3b6iss8i9kufetc4swi8utmj">box drive</a>. You can download the file itself or click the download button in the upper right corner of the screen. (You may need to dismiss a message about logging in to see the button, but you do not need to log in to download the data.) Save the file to a folder on your computer that you can find. If the file you downloaded is a .zip file, unzip the file.</p>
-<p>The data for this workshop is one javascript file called <code>campus_food.js</code> and a folder called <code>img</code> with 9 images.</p>
-</div>
-<div id="folders" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Folders<a href="set-up.html#folders" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Using your computer’s file browsing program, navigate to a folder you want to work in. In that folder, create a new folder to hold your files for this project, such as <em>my_web_map</em>. Inside that folder, create another folder called <em>docs</em>. The <em>docs</em> folder will hold the HTML and javascript files that will create our web map.</p>
-<p>Your folder structure should now look like this:</p>
-<pre><code>my_web_map
-|-- docs
-</code></pre>
-</div>
-<div id="files" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Files<a href="set-up.html#files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Move the file you downloaded for this workshop called <code>campus_food.js</code> and the folder called ‘img’ into the <em>docs</em> folder.</p>
-<p>Open your preferred text editor application. Create a new, blank file. Save it inside your <em>docs</em> folder and call it <code>index.html</code>. This will be the homepage for our web site that will hold our web map.</p>
-<p>Your folder and file structure should now look like this:</p>
-<pre><code>my_web_map
-|-- docs
-|   |-- img
-|   |-- campus_food.js
-|   |-- index.html
-</code></pre>
-
-</div>
-</div>
-            </section>
-
-          </div>
-        </div>
-      </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="build-a-webpage.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+<!-- Navbar -->
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a href="index.html">← Back to Home</a>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+</nav>
+
+<div class="container mt-3">
+
+  <h3>Explore Spatial Data</h3>
+
+  <!-- Filters -->
+  <div class="row">
+
+    <div class="col-md-4 filter-box">
+      <input type="text" id="speciesSearch" class="form-control" placeholder="Search species">
+    </div>
+
+    <div class="col-md-4 filter-box">
+      <input type="number" id="yearMin" class="form-control" placeholder="Min Year">
+    </div>
+
+    <div class="col-md-4 filter-box">
+      <input type="number" id="yearMax" class="form-control" placeholder="Max Year">
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6 filter-box">
+      <select id="journalFilter" class="form-select">
+        <option value="">All Journals</option>
+      </select>
+    </div>
+
+    <div class="col-md-6 filter-box">
+      <button class="btn btn-primary w-100" onclick="applyFilters()">Apply Filters</button>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Map -->
+<div id="map"></div>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+
 <script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": false,
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/ucdavisdatalab/workshop_web_maps/edit/master/02_file-structure.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": "https://github.com/ucdavisdatalab/workshop_web_maps/blob/master/02_file-structure.Rmd",
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
+
+var map = L.map('map').setView([20, 0], 2);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+var markers = L.markerClusterGroup();
+let geoData;
+
+// Load data
+fetch('data/points.geojson')
+  .then(res => res.json())
+  .then(data => {
+    geoData = data;
+
+    populateJournalFilter(data.features);
+    updateMap(data.features);
+
+    map.addLayer(markers);
+  });
+
+
+// Populate journal dropdown
+function populateJournalFilter(features) {
+  let journals = [...new Set(features.map(f => f.properties.journal))];
+
+  let select = document.getElementById("journalFilter");
+
+  journals.forEach(j => {
+    let opt = document.createElement("option");
+    opt.value = j;
+    opt.text = j;
+    select.appendChild(opt);
+  });
 }
-});
-});
+
+
+// Update map
+function updateMap(features) {
+
+  markers.clearLayers();
+
+  let layer = L.geoJSON(features, {
+    onEachFeature: function (feature, layer) {
+
+      let p = feature.properties;
+
+      layer.bindPopup(`
+        <b>${p.species}</b><br>
+        ${p.journal} (${p.year})<br>
+        <a href="${p.doi}" target="_blank">View DOI</a>
+      `);
+    }
+  });
+
+  markers.addLayer(layer);
+}
+
+
+// Apply filters
+function applyFilters() {
+
+  let speciesQuery = document.getElementById("speciesSearch").value.toLowerCase();
+  let yearMin = document.getElementById("yearMin").value;
+  let yearMax = document.getElementById("yearMax").value;
+  let journal = document.getElementById("journalFilter").value;
+
+  let filtered = geoData.features.filter(f => {
+
+    let p = f.properties;
+
+    let matchSpecies = p.species.toLowerCase().includes(speciesQuery);
+    let matchJournal = journal === "" || p.journal === journal;
+    let matchYearMin = !yearMin || p.year >= yearMin;
+    let matchYearMax = !yearMax || p.year <= yearMax;
+
+    return matchSpecies && matchJournal && matchYearMin && matchYearMax;
+  });
+
+  updateMap(filtered);
+}
+
 </script>
 
 </body>
-
 </html>
